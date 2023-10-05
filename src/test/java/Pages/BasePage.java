@@ -56,15 +56,18 @@ public class BasePage {
      * Método que abre el navagador y lo maximiza en toda la pantalla
      */
     public static void abrirNavegador() {
-        if (driver == null) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--remote-allow-origins=*");
-            options.setAcceptInsecureCerts(true);
-            // options.addArguments("--headless");
-            driver = new ChromeDriver(options);
-            driver.manage().window().maximize();
-        }
-
+           if (driver == null) {
+               try {
+                   ChromeOptions options = new ChromeOptions();
+                   options.addArguments("--remote-allow-origins=*");
+                   options.setAcceptInsecureCerts(true);
+                   // options.addArguments("--headless");
+                   driver = new ChromeDriver(options);
+                   driver.manage().window().maximize();
+                }catch (Exception e) {
+                   logger.error("Error con el navegador al maximizarlo ",e.getMessage());
+                   throw new RuntimeException("No se pudo maximizar el navegador correctamente ",e);
+               }
     }
 
     /**
@@ -84,16 +87,16 @@ public class BasePage {
     /**
      * Método que cierra el navegador
      */
-    public static void cerrarNavegador() {
-        try {
-            driver.manage().deleteAllCookies();
-            driver.quit();
-            driver = null;
-        }catch (Exception e){
-            logger.error("Error al cerrar el navegador o borrar cookies",e);
-            throw new RuntimeException("No se pudo cerrar el navegador correctamente",e);
+        public static void cerrarNavegador() {
+            try {
+                driver.manage().deleteAllCookies();
+                driver.quit();
+                driver = null;
+            }catch (Exception e){
+                logger.error("Error al cerrar el navegador o borrar cookies",e);
+                throw new RuntimeException("No se pudo cerrar el navegador correctamente",e);
+            }
         }
-    }
 
     public void clickElement(String locator) {
         try{
@@ -101,6 +104,7 @@ public class BasePage {
         }catch (Exception e){
             logger.error("Error en el localizador o al hacer clic en el elemento: " + locator,e);
             throw new RuntimeException("No se pudo dar clic en el elemento con el localizador: " + locator,e);
+
         }
     }
 
@@ -110,7 +114,12 @@ public class BasePage {
      * @param locator el parámetro de la ruta del elemento a esperar
      */
     private WebElement find(String locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+        }catch (Exception e){
+            logger.error("Error en el localizador o al hacer clic en el elemento: " + locator,e);
+            return null;
+        }
     }
 
     /**
@@ -181,7 +190,9 @@ public class BasePage {
         }
         catch(Exception e){
             logger.error("Error al obtener el primer elemento con el selector: " + selector.toString(), e);
+
         }
+        return " ";
     }
 
     private WebElement esperaObtenerPrimerElemento(By selector){
@@ -205,3 +216,5 @@ public class BasePage {
     }
 
 }//Cierre de la clase
+
+
