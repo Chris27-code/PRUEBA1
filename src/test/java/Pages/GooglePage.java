@@ -81,9 +81,8 @@ public class GooglePage extends BasePage {
             return getText(PRIMER_RESULTADO_BUSQUEDA);
         }catch (Exception e){
             logger.error("Error al obtener primer resultado de busqueda: " + PRIMER_RESULTADO_BUSQUEDA, e);
+            return "";
         }
-        //preguntar si esto es correcto, ya que pedía que indicara un return en esta parte.
-        return null;
     }
     public List<String> iterarResultadosGoogle(){
         try {
@@ -95,8 +94,7 @@ public class GooglePage extends BasePage {
             return resultados;
         }catch (Exception e){
             logger.error("Error al iterar sobre los resultados web: " + driver.toString(), e);
+            return null;
         }
-        //preguntar si esto es correcto, ya que pedía que indicara un return en esta parte.
-        return null;
     }
 }

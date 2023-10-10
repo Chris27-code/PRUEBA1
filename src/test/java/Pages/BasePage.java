@@ -64,10 +64,11 @@ public class BasePage {
                    // options.addArguments("--headless");
                    driver = new ChromeDriver(options);
                    driver.manage().window().maximize();
-                }catch (Exception e) {
-                   logger.error("Error con el navegador al maximizarlo ",e.getMessage());
-                   throw new RuntimeException("No se pudo maximizar el navegador correctamente ",e);
+               } catch (Exception e) {
+                   logger.error("Error con el navegador al maximizarlo ", e.getMessage());
+                   throw new RuntimeException("No se pudo maximizar el navegador correctamente ", e);
                }
+           }
     }
 
     /**
