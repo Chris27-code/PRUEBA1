@@ -78,7 +78,7 @@ public class GooglePage extends BasePage {
     }
     public String obtenerTextoPrimerElementoBusqueda(){
         try {
-            return getText(PRIMER_RESULTADO_BUSQUEDA);
+            return getTextFirstElementWeb(RESULTADOS_SELECTOR);
         }catch (Exception e){
             logger.error("Error al obtener primer resultado de busqueda: " + PRIMER_RESULTADO_BUSQUEDA, e);
             return "";

@@ -31,5 +31,4 @@ public class GoogleStepsDefinitions {
         Assert.assertTrue("Comparación de resultado esperado vs resultado real en la búsqueda: ", resultadoReal.contains(resultadoEsperado));
         //googlePage.terminarNavegador();
     }
-
 }
