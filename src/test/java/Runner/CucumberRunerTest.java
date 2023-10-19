@@ -11,16 +11,8 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/Features"
-        ,glue={"StepsDefinitions"}
+        ,glue={"StepsDefinitions","Hooks"}
 )
 public class CucumberRunerTest {
-    @Before
-    public static void CrearDriver(){
-        BasePage.abrirNavegador();
-    }
-    @After
-    public static void EliminarDriver(){
-        BasePage.cerrarNavegador();
-    }
 
 }
