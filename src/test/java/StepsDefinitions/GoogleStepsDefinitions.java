@@ -7,9 +7,7 @@ import org.junit.Assert;
 public class GoogleStepsDefinitions {
     GooglePage googlePage = new GooglePage();
     @Given("^Dado que el usuario abre el navegador$")
-    public void dado_que_el_usuario_abre_el_navegador() {
-        googlePage.ejecutarNavegador();
-    }
+    public void dado_que_el_usuario_abre_el_navegador() {}
     @When("^Carga el sitio web$")
     public void carga_el_sitio_web() {
         googlePage.abrirPaginaGoogle();
@@ -29,6 +27,6 @@ public class GoogleStepsDefinitions {
         System.out.println("R.E.: " + resultadoEsperado);
         System.out.println("R.R.: " + resultadoReal);
         Assert.assertTrue("Comparación de resultado esperado vs resultado real en la búsqueda: ", resultadoReal.contains(resultadoEsperado));
-        //googlePage.terminarNavegador();
+        googlePage.terminarNavegador();
     }
 }

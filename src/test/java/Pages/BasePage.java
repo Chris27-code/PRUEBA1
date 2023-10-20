@@ -30,6 +30,23 @@ public class BasePage {
     private static final Logger logger = LogManager.getLogger(BasePage.class);
 
     static {
+        inicializarDriver();
+    }
+
+
+
+    /**
+     * Constructor para la pagina web
+     *
+     * @param driver parametro driver define un objeto de driver maneja el navegador y es configurable
+     */
+    public BasePage(WebDriver driver) {
+        if(driver == null){
+            inicializarDriver();
+        }
+    }//Cierre del constructor
+
+    private static void inicializarDriver(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.setAcceptInsecureCerts(true);
@@ -39,36 +56,6 @@ public class BasePage {
         durationtimeout = Duration.ofSeconds(10);
         durationsleep = Duration.ofSeconds(100);
         wait = new WebDriverWait(driver, durationtimeout, durationsleep);
-
-    }
-
-    /**
-     * Constructor para la pagina web
-     *
-     * @param driver parametro driver define un objeto de driver maneja el navegador y es configurable
-     */
-    public BasePage(WebDriver driver) {
-        BasePage.driver = driver;
-        wait = new WebDriverWait(driver, durationtimeout, durationsleep);
-    }//Cierre del constructor
-
-    /**
-     * Método que abre el navagador y lo maximiza en toda la pantalla
-     */
-    public static void abrirNavegador() {
-           if (driver == null) {
-               try {
-                   ChromeOptions options = new ChromeOptions();
-                   options.addArguments("--remote-allow-origins=*");
-                   options.setAcceptInsecureCerts(true);
-                   // options.addArguments("--headless");
-                   driver = new ChromeDriver(options);
-                   driver.manage().window().maximize();
-               } catch (Exception e) {
-                   logger.error("Error con el navegador al maximizarlo ", e.getMessage());
-                   throw new RuntimeException("No se pudo maximizar el navegador correctamente ", e);
-               }
-           }
     }
 
     /**

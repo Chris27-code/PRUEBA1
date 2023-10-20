@@ -20,20 +20,13 @@ public class GooglePage extends BasePage {
     private static final Logger logger = LogManager.getLogger(BasePage.class);
 
     /**
-     * Constructor para la pagina web
+     * Constructor para la página web
      *
-     * @param driver parametro driver define un objeto de driver maneja el navegador y es configurable
      */
     public GooglePage() {
         super(driver);
     }
-    public void ejecutarNavegador(){
-        try {
-            abrirNavegador();
-        }catch (Exception e){
-            logger.error("Error al abrir el navegador: " + driver.toString(), e);
-        }
-    }
+
     public void abrirPaginaGoogle(){
         try {
             abrirPagina(url);
